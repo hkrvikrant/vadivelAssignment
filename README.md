@@ -1,3 +1,46 @@
+# React Native Developer Assignment
+
+Objective: Build a simple React Native application that includes the following features:
+
+Requirements:
+- Login Screen:
+    - Create a login screen with a username input field.
+    - Upon entering the username and pressing the "Login" button, the user is redirected to the home screen.
+    - Validate that the username is provided before proceeding to the next screen.
+
+- Current Location:
+    - Upon navigating to the home screen, fetch and display the user’s current geographic location (latitude and longitude).
+    - Use the device’s location services (e.g., react-native-geolocation-service or react-native-location).
+
+- Merchants List:
+    - Display a list of merchants on the home screen. Each merchant should have a name displayed.
+    - The list should be static for now, but it can be extended later to dynamically load merchants based on the user's location or other criteria.
+
+- Logout Functionality:
+    - Provide a "Logout" button that, when pressed, navigates the user back to the login screen.
+    - Ensure proper cleanup of any session data upon logout.
+
+- Additional Notes:
+    - Make sure the app requests the necessary permissions for location access on Android.
+    - Handle location fetching errors and show a relevant message to the user if the location cannot be accessed.
+    - Use React Navigation for screen transitions.
+    - Feel free to add basic styling, but prioritize functionality over design for this assignment.
+
+- Technologies & Libraries:
+    - React Native
+    - React Navigation (for navigation between screens)
+    - react-native-geolocation-service (or react-native-location) for fetching the user’s location
+
+- Deliverables:
+    - Full source code for the React Native app.
+    - Instructions on how to run the app and any setup steps, if necessary.
+
+
+# --------------------------------------------- 
+- To run this app need to setup React, Node, Android Studio
+
+# --------------------------------------------- 
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
