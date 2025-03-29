@@ -1,7 +1,7 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
 import Colors from './Colors';
-import {FontsFamilies, FontSize, FontsWeights} from './Fonts';
+import { FontsFamilies, FontSize, FontsWeights } from './Fonts';
 
 export const windowHeight = Dimensions.get('window').height;
 export const windowWidth = Dimensions.get('window').width;
@@ -10,35 +10,33 @@ export const commonStyles = StyleSheet.create({
   commonContainer: {
     backgroundColor: Colors.white,
     minHeight: windowHeight,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-
-  inputContainer: {
-    marginVertical: 10,
+  logoImage: {
+    width: windowWidth * 0.83,
+    height: windowWidth * 0.6,
   },
-  inputTitle: {
-    fontSize: FontSize.fontSize16,
-    fontWeight: FontsWeights.FW500,
-    paddingBottom: 5,
-    fontFamily: FontsFamilies.serif,
-  },
-
   paddingRight15: {
     paddingRight: 15,
   },
-
-  // common auth button style
-  commonButtonStyle: {
-    borderRadius: 5,
-    padding: 10,
-    alignItems: 'center',
-    marginVertical: 20,
-    backgroundColor: Colors.darkBlue,
+  padding20: {
+    padding: 20,
   },
-  commonButtonTextStyle: {
-    color: Colors.white,
-    letterSpacing: 0.7,
-    fontWeight: FontsWeights.FW500,
-    textAlignVertical: 'center',
+
+  // Auth common
+  authScrollContainer: {
+    backgroundColor: Colors.white,
+    minHeight: windowHeight,
+  },
+  authTopImg: {
+    height: windowHeight * 0.415,
+    width: windowWidth * 0.93,
+  },
+  authTitle: {
+    marginVertical: 15,
+    fontSize: FontSize.fontSize26,
+    fontWeight: FontsWeights.FW700,
     fontFamily: FontsFamilies.serif,
   },
 });
