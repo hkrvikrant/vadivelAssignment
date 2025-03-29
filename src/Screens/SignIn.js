@@ -1,29 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Formik} from 'formik';
-import * as Yup from 'yup';
 
 import images from '../Themes/Images';
 import {commonStyles, windowHeight, windowWidth} from '../Themes/CommonStyle';
 import {FontsFamilies, FontSize, FontsWeights} from '../Themes/Fonts';
+import Colors from '../Themes/Colors';
+
 import InputWithTitle from '../CommonComponent/InputWithTitle';
 import CButton from '../CommonComponent/CButton';
+import {AuthContext} from '../Constant/Context';
+import {loginValidationSchema} from '../Themes/validations';
 
-const SignIn = () => {
-  const isApiLoading = false;
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .required('Email is required')
-      .test('Validate Email', `Please Enter a Valid Email`, value => {
-        const re =
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(value).toLowerCase());
-      }),
-    password: Yup.string()
-      .required('Password is required')
-      .min(8, 'Password must contain 8 or more characters'),
-  });
+const SignIn = ({navigation}) => {
+  const {signIn} = useContext(AuthContext);
 
   return (
     <Formik
@@ -31,17 +21,18 @@ const SignIn = () => {
         email: '',
         password: '',
       }}
-      validationSchema={validationSchema}
+      validationSchema={loginValidationSchema}
       onSubmit={values => {
-        console.warn('userLoginAction', values);
+        signIn(values?.email);
       }}>
       {({values, handleChange, handleSubmit, errors, touched}) => (
         <ScrollView
-          contentContainerStyle={commonStyles.commonContainer}
+          contentContainerStyle={commonStyles.authScrollContainer}
           showsVerticalScrollIndicator={false}>
-          <Image style={styles.topImg} source={images.authCircle} />
-          <View style={styles.container}>
-            <Text style={styles.title}>SignIn</Text>
+          {/* <Image style={commonStyles.authTopImg} source={images.authCircle} /> */}
+          <Image source={images.authCircle} />
+          <View style={commonStyles.padding20}>
+            <Text style={commonStyles.authTitle}>SignIn</Text>
 
             <InputWithTitle
               title="Email Address"
@@ -58,12 +49,12 @@ const SignIn = () => {
               passwordInput={true}
               error={touched?.password && errors?.password}
             />
-            <CButton
-              title="Login"
-              // onPress={() => navigation.navigate('home')}
-              onPress={() => handleSubmit()}
-              disabled={isApiLoading}
-            />
+            <Text
+              style={styles.forgotPassword}
+              onPress={() => navigation.navigate('forgotPassword')}>
+              Forgot Passowrd?
+            </Text>
+            <CButton title="Login" onPress={() => handleSubmit()} />
           </View>
         </ScrollView>
       )}
@@ -72,18 +63,12 @@ const SignIn = () => {
 };
 
 const styles = StyleSheet.create({
-  topImg: {
-    height: windowHeight * 0.415,
-    width: windowWidth * 0.93,
-  },
-  container: {
-    padding: 20,
-  },
-  title: {
-    marginVertical: 15,
-    fontSize: FontSize.fontSize26,
-    fontWeight: FontsWeights.FW700,
+  forgotPassword: {
+    fontSize: FontSize.fontSize16,
+    fontWeight: FontsWeights.FW500,
     fontFamily: FontsFamilies.serif,
+    textAlign: 'right',
+    color: Colors.blue,
   },
 });
 
