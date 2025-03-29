@@ -10,6 +10,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 
 import Colors from '../Themes/Colors';
 import {commonStyles} from '../Themes/CommonStyle';
+import {FontsFamilies, FontSize} from '../Themes/Fonts';
 
 export default function InputWithTitle({
   title,
@@ -17,6 +18,7 @@ export default function InputWithTitle({
   onChangeText,
   value,
   passwordInput,
+  error,
 }) {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
@@ -49,6 +51,7 @@ export default function InputWithTitle({
           onChangeText={e => onChangeText(e)}
         />
       )}
+      {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
   );
 }
@@ -61,6 +64,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.grey,
     paddingLeft: 10,
     letterSpacing: 0.5,
+    fontFamily: FontsFamilies.serif
   },
   secureInputContainer: {
     flexDirection: 'row',
@@ -75,5 +79,10 @@ const styles = StyleSheet.create({
   },
   secureInputText: {
     flex: 1,
+  },
+  errorText: {
+    color: Colors.error,
+    fontSize: FontSize.fontSize12,
+    fontFamily: FontsFamilies.serif,
   },
 });
