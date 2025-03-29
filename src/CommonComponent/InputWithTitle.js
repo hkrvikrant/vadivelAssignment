@@ -9,8 +9,7 @@ import {
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import Colors from '../Themes/Colors';
-import {commonStyles} from '../Themes/CommonStyle';
-import {FontsFamilies, FontSize} from '../Themes/Fonts';
+import {FontsFamilies, FontSize, FontsWeights} from '../Themes/Fonts';
 
 export default function InputWithTitle({
   title,
@@ -23,8 +22,8 @@ export default function InputWithTitle({
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   return (
-    <View style={commonStyles.inputContainer}>
-      <Text style={commonStyles.inputTitle}>{title}</Text>
+    <View style={styles.inputContainer}>
+      <Text style={styles.inputTitle}>{title}</Text>
       {passwordInput ? (
         <View style={styles.secureInputContainer}>
           <TextInput
@@ -57,6 +56,15 @@ export default function InputWithTitle({
 }
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    marginVertical: 10,
+  },
+  inputTitle: {
+    fontSize: FontSize.fontSize16,
+    fontWeight: FontsWeights.FW500,
+    paddingBottom: 5,
+    fontFamily: FontsFamilies.serif,
+  },
   inputText: {
     backgroundColor: Colors.white,
     borderRadius: 10,
@@ -64,7 +72,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.grey,
     paddingLeft: 10,
     letterSpacing: 0.5,
-    fontFamily: FontsFamilies.serif
+    fontFamily: FontsFamilies.serif,
   },
   secureInputContainer: {
     flexDirection: 'row',
