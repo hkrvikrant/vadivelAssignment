@@ -11,9 +11,12 @@ import Geolocation from 'react-native-geolocation-service';
 import {windowHeight} from '../Themes/CommonStyle';
 import Colors from '../Themes/Colors';
 import {FontsFamilies, FontSize, FontsWeights} from '../Themes/Fonts';
+import {GET_USER_Email} from '../Services/services';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [currentLoc, setCurrentLoc] = useState();
+  const [userEmail, setUserEmail] = useState(null);
+
   const merchantsList = [
     {
       id: 1,
@@ -368,8 +371,17 @@ const Home = () => {
   ];
 
   useEffect(() => {
+    getUserDetails();
+  }, []);
+
+  useEffect(() => {
     getLocation();
   }, [currentLoc]);
+
+  const getUserDetails = async () => {
+    let uEmail = await GET_USER_Email();
+    setUserEmail(uEmail);
+  };
 
   const requestLocationPermission = async () => {
     try {
@@ -415,16 +427,32 @@ const Home = () => {
   };
 
   const renderItem = ({item}) => (
-    <Text style={styles.text}>
+    <Text
+      style={styles.text}
+      onPress={() =>
+        navigation.navigate('marchentDetails', {
+          firstName: item?.first_name,
+          lastName: item?.last_name,
+        })
+      }>
       {item?.first_name} {item?.last_name}
     </Text>
   );
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.welcomeTitle}>Welcome Back</Text>
+      <Text style={styles.userEmailText}>{userEmail}</Text>
+
       <Text style={styles.title}>My Location</Text>
-      <Text style={styles.text}>Lat: {currentLoc?.coords?.latitude}</Text>
-      <Text style={styles.text}>Long: {currentLoc?.coords?.longitude}</Text>
+      {currentLoc ? (
+        <>
+          <Text style={styles.text}>Lat: {currentLoc?.coords?.latitude}</Text>
+          <Text style={styles.text}>Long: {currentLoc?.coords?.longitude}</Text>
+        </>
+      ) : (
+        <Text style={styles.text}>We don't have Location Permission</Text>
+      )}
       <Text style={styles.title}>Merchants Name</Text>
       <FlatList data={merchantsList} renderItem={renderItem} />
     </ScrollView>
@@ -438,12 +466,24 @@ const styles = StyleSheet.create({
     minHeight: windowHeight,
     backgroundColor: Colors.white,
   },
-  title: {
+  welcomeTitle: {
+    color: Colors.blue,
+    fontSize: FontSize.fontSize24,
+    fontWeight: FontsWeights.FW700,
+    fontFamily: FontsFamilies.serif,
+    marginTop: 15,
+  },
+  userEmailText: {
     color: Colors.black,
+    fontFamily: FontsFamilies.serif,
+    letterSpacing: 0.5,
+  },
+  title: {
+    color: Colors.blue,
     fontSize: FontSize.fontSize18,
     fontWeight: FontsWeights.FW700,
     fontFamily: FontsFamilies.serif,
-    marginVertical: 15,
+    marginTop: 15,
   },
   text: {
     color: Colors.black,
