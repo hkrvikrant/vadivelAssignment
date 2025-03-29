@@ -1,7 +1,7 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
 import Colors from './Colors';
-import {FontSize, FontsWeights} from './Fonts';
+import {FontsFamilies, FontSize, FontsWeights} from './Fonts';
 
 export const windowHeight = Dimensions.get('window').height;
 export const windowWidth = Dimensions.get('window').width;
@@ -19,6 +19,7 @@ export const commonStyles = StyleSheet.create({
     fontSize: FontSize.fontSize16,
     fontWeight: FontsWeights.FW500,
     paddingBottom: 5,
+    fontFamily: FontsFamilies.serif,
   },
 
   paddingRight15: {
@@ -38,5 +39,6 @@ export const commonStyles = StyleSheet.create({
     letterSpacing: 0.7,
     fontWeight: FontsWeights.FW500,
     textAlignVertical: 'center',
+    fontFamily: FontsFamilies.serif,
   },
 });
