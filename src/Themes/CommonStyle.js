@@ -1,7 +1,7 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
 import Colors from './Colors';
-import { FontsFamilies, FontSize, FontsWeights } from './Fonts';
+import {FontsFamilies, FontSize, FontsWeights} from './Fonts';
 
 export const windowHeight = Dimensions.get('window').height;
 export const windowWidth = Dimensions.get('window').width;
@@ -22,6 +22,9 @@ export const commonStyles = StyleSheet.create({
   },
   padding20: {
     padding: 20,
+  },
+  flexRow: {
+    flexDirection: 'row',
   },
 
   // Auth common
